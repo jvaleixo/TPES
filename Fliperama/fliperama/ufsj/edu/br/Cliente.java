@@ -12,20 +12,15 @@ public class Cliente extends Usuario{
 		return this.creditos;
 	}
 
-	public void cadastrarCliente(String n) {
-		
-	}
-
-	public void cadastrarCliente() {
-		
-	}
 	public void visualizarCliente(Jogo j) {
 		
 	}
 	public void visualizarPontuacao(Jogo j) {
 		
 	}
-
+	public void cadastrarCliente(String n, String s) {
+		
+	}
 	public void fazerLogin(String n, String s) {
 		
 	}

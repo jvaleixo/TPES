@@ -20,7 +20,7 @@ public abstract class Usuario {
 		return this.nome;
 	}
 	
-	public abstract void cadastrarCliente(String n) ;
+	public abstract void cadastrarCliente(String n, String senha) ;
 
 	public abstract void fazerLogin(String n, String s) ;
 }
