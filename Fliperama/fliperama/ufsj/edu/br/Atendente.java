@@ -1,9 +1,19 @@
 package fliperama.ufsj.edu.br;
 
+import fliperama.ufsj.edu.br.util.Scan;
 
 public class Atendente extends Usuario{
 
+	public Atendente() {
+		super(true);
+	}
 	
+	@Override
+	public Boolean cadastrarUsuario(String n, String s) {
+		super.setNome(n);
+		super.setSenha(s);
+	    return true;
+	}
 	public void cadastrarAtendente(String n, String s) {
 		
 	}
@@ -23,12 +33,6 @@ public class Atendente extends Usuario{
 		
 	}
 	public void gereciarCreditos(Cliente c, int cred) {
-		
-	}
-	public void cadastrarCliente(String n, String s) {
-		
-	}
-	public void fazerLogin(String n, String s) {
 		
 	}
 }
