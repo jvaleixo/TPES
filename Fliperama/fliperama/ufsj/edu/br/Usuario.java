@@ -5,7 +5,9 @@ public abstract class Usuario {
 	private String senha;
 	private Boolean root;
 	
-	public Usuario(Boolean root) {
+	public Usuario(String n, String s, Boolean root) {
+		this.setNome(n);
+		this.setSenha(s);
 		setRoot(root);
 	}
 	// get
@@ -30,7 +32,11 @@ public abstract class Usuario {
 		return this.root;
 	}
 	
-	public abstract Boolean cadastrarUsuario(String n, String s);
+	public Boolean cadastrarUsuario(String n, String s) {
+		this.setNome(n);
+		this.setSenha(s);
+	    return true;
+	}
 
 	public Boolean fazerLogin(String n, String s) {
 		if (this.getNome().equals(n) && this.getSenha().equals(s))

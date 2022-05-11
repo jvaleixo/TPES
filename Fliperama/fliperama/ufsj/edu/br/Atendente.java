@@ -4,15 +4,12 @@ import fliperama.ufsj.edu.br.util.Scan;
 
 public class Atendente extends Usuario{
 
-	public Atendente() {
-		super(true);
+	public Atendente(String n, String s) {
+		super(n, s, true);
 	}
 	
-	@Override
-	public Boolean cadastrarUsuario(String n, String s) {
-		super.setNome(n);
-		super.setSenha(s);
-	    return true;
+	public void cadastrarCliente(Cliente c, int cred) {
+		c.setCreditos(cred);
 	}
 	public void cadastrarAtendente(String n, String s) {
 		
