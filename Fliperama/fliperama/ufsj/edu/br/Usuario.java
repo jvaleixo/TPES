@@ -33,7 +33,7 @@ public abstract class Usuario {
 	public abstract Boolean cadastrarUsuario(String n, String s);
 
 	public Boolean fazerLogin(String n, String s) {
-		if (this.getNome().equals(n)&& this.getSenha().equals(s))
+		if (this.getNome().equals(n) && this.getSenha().equals(s))
 			return true;
 		return false;
 	}
