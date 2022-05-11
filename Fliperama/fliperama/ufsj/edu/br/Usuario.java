@@ -24,7 +24,7 @@ public abstract class Usuario {
 		return this.nome;
 	}
 	public String getSenha() {
-		return this.nome;
+		return this.senha;
 	}
 	public Boolean getRoot() {
 		return this.root;

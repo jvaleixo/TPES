@@ -67,6 +67,9 @@ public class Principal {
 		}else {
 			Cliente cliente = new Cliente();
 			if(cliente.cadastrarUsuario(nome, senha)) {
+
+		    	System.out.println("\n nome: " + nome + " Senha: " + senha);
+				System.out.println("\n nome: " + cliente.getNome() + " Senha: " + cliente.getSenha());
 				usuarios.add(cliente);
 				System.out.println("\nCliente Cadastrado\n\n");
 			}
@@ -80,6 +83,7 @@ public class Principal {
 	    String senha = Scan.readLine();
 	    
 	    for(Usuario usuario : usuarios) {
+	    	System.out.println("\n nome: " + usuario.getNome() + " Senha: " + usuario.getSenha());
 	    	if(usuario.fazerLogin(nome, senha)){
 	    		return usuario;
 	    	}
