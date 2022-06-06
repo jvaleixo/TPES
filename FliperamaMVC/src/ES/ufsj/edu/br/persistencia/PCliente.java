@@ -43,7 +43,7 @@ public class PCliente {
 					}
 					i++;
 				}
-				Cliente c = new Cliente(nome, senha, Integer.parseInt(cpf));
+				Cliente c = new Cliente(nome, senha, Long.parseLong(cpf));
 				clientes.add(c);
 				linha = br.readLine();
 			}
@@ -86,7 +86,7 @@ public class PCliente {
 		return 0;
 	}
 	
-	public int checarCPFSenha(int cpf, String senha) {
+	public int checarCPFSenha(long cpf, String senha) {
 		for(Cliente cliente : clientes) {
 			if(cpf == cliente.getCPF() && senha.equals(cliente.getSenha()))
 				return 1;

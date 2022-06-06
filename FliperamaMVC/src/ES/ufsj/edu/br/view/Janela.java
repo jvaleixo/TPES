@@ -212,26 +212,33 @@ public class Janela implements ActionListener{
 	    	System.exit(0);
 		}
 		else if (e.getSource() == botaoConfirmar) {	
-			String nome = textoNome.getText();
-			int cpf = Integer.parseInt(textoCPF.getText());
-		    String senha = new String(textoSenha.getPassword()); 
-			Cliente c = new Cliente(nome, senha, cpf);
-			int n = cCliente.cadastrarCliente(c);
-			if (n == 0) {
-				JOptionPane.showMessageDialog(null, "CPF já cadastrado", "Erro", JOptionPane.ERROR_MESSAGE);
+			try {
+				String nome = textoNome.getText();
+				long cpf = Long.parseLong(textoCPF.getText());
+				String senha = new String(textoSenha.getPassword()); 
+				Cliente c = new Cliente(nome, senha, cpf);
+				int n = cCliente.cadastrarCliente(c);
+				if (n == 0) {
+					JOptionPane.showMessageDialog(null, "CPF já cadastrado", "Erro", JOptionPane.ERROR_MESSAGE);
+					textoNome.setText("");
+					textoCPF.setText("");
+					textoSenha.setText("");
+				}
+				else {
+					textoNome.setText("");
+					textoCPF.setText("");
+					textoSenha.setText("");
+					moldura.remove(painelCC);
+					moldura.add(painelMP);
+					moldura.validate();
+					moldura.setVisible(false);
+					moldura.setVisible(true);
+				}
+			} catch (NumberFormatException t) {
+				JOptionPane.showMessageDialog(null, "CPF deve conter apenas números", "Erro", JOptionPane.ERROR_MESSAGE);
 				textoNome.setText("");
 				textoCPF.setText("");
 				textoSenha.setText("");
-			}
-			else {
-				textoNome.setText("");
-				textoCPF.setText("");
-				textoSenha.setText("");
-				moldura.remove(painelCC);
-				moldura.add(painelMP);
-				moldura.validate();
-				moldura.setVisible(false);
-				moldura.setVisible(true);
 			}
 		}
 		else if (e.getSource() == botaoCancelar) {
@@ -246,7 +253,7 @@ public class Janela implements ActionListener{
 			}
 		}
 		else if (e.getSource() == botaoLogin) {
-			int cpf = Integer.parseInt(textoCPFFL.getText());
+			long cpf = Long.parseLong(textoCPFFL.getText());
 		    String senha = new String(textoSenhaFL.getPassword()); 
 			int n = cCliente.fazerLogin(cpf, senha);
 			if (n == 0) {

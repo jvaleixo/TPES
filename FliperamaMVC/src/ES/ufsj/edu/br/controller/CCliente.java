@@ -35,7 +35,7 @@ public class CCliente {
 		return n;
 	}
 	
-	public int fazerLogin(int cpf, String senha) {
+	public int fazerLogin(long cpf, String senha) {
 		int n = pCliente.checarCPFSenha(cpf, senha);
 		return n;
 	}

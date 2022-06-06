@@ -3,10 +3,10 @@ package ES.ufsj.edu.br.model;
 public abstract class Usuario {
 	private String nome;
 	private String senha;
-	private int CPF;
+	private long CPF;
 	private Boolean root;
 	
-	public Usuario(String n, String s, int cpf, Boolean root) {
+	public Usuario(String n, String s, long cpf, Boolean root) {
 		this.setNome(n);
 		this.setCPF(cpf);
 		this.setSenha(s);
@@ -19,7 +19,7 @@ public abstract class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public void setCPF (int cpf) {
+	public void setCPF (long cpf) {
 		this.CPF = cpf;
 	}
 	public void setRoot(Boolean root) {
@@ -33,14 +33,14 @@ public abstract class Usuario {
 	public String getSenha() {
 		return this.senha;
 	}
-	public int getCPF() {
+	public long getCPF() {
 		return this.CPF;
 	}
 	public Boolean getRoot() {
 		return this.root;
 	}
 	
-	public Boolean cadastrarUsuario(String n, String s, int cpf) {
+	public Boolean cadastrarUsuario(String n, String s, long cpf) {
 		this.setNome(n);
 		this.setSenha(s);
 		this.setCPF(cpf);
