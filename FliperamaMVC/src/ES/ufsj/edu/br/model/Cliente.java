@@ -5,8 +5,8 @@ import ES.ufsj.edu.br.util.Scan;
 public class Cliente extends Usuario{
 	private int creditos;
 	
-	public Cliente(String n, String s) {
-		super(n, s, false);
+	public Cliente(String n, String s, int cpf) {
+		super(n, s, cpf,  false);
 		this.setCreditos(0);
 	}
 	//set

@@ -32,9 +32,18 @@ public class PCliente {
 			linha = br.readLine();
 			while (linha != null) {
 				String[] dados = linha.split(" ");
-				String usuario = dados[0];
+				String cpf = dados[0];
 				String senha = dados[1];
-				Cliente c = new Cliente(usuario, senha);
+				int i = 0;
+				String nome = dados[2];
+				for( String dado : dados) {
+					if (i > 2) {
+						nome = nome.concat(" ");
+						nome = nome.concat(dado);
+					}
+					i++;
+				}
+				Cliente c = new Cliente(nome, senha, Integer.parseInt(cpf));
 				clientes.add(c);
 				linha = br.readLine();
 			}
@@ -50,7 +59,7 @@ public class PCliente {
 		if (n == JFileChooser.APPROVE_OPTION) {
 			FileWriter arquivoW = new FileWriter(selecionaArquivo.getSelectedFile().getAbsolutePath());
 			for(Cliente cliente : clientes) {
-				arquivoW.write(cliente.getNome() + " " + cliente.getSenha() + "\n");
+				arquivoW.write(cliente.getCPF() + " " + cliente.getSenha() + " " + cliente.getNome() + "\n");
 			}
 			arquivoW.close();
 		}
@@ -61,7 +70,7 @@ public class PCliente {
 	
 	public int buscarCliente(Cliente c) {
 		for (Cliente cliente : clientes) {
-			if(c.getNome().equals(cliente.getNome())) {
+			if(c.getCPF() == cliente.getCPF()) {
 				return 0;
 			}
 		}
@@ -77,9 +86,9 @@ public class PCliente {
 		return 0;
 	}
 	
-	public int checarUsuarioSenha(String nome, String senha) {
+	public int checarCPFSenha(int cpf, String senha) {
 		for(Cliente cliente : clientes) {
-			if(nome.equals(cliente.getNome()) && senha.equals(cliente.getSenha()))
+			if(cpf == cliente.getCPF() && senha.equals(cliente.getSenha()))
 				return 1;
 		}
 		return 0;
@@ -87,6 +96,6 @@ public class PCliente {
 	
 	public void imprimirLista() {
 		for (Cliente cliente : clientes)
-			System.out.println("Usuario: " + cliente.getNome() + " Senha: " + cliente.getSenha());
+			System.out.println("CPF: " + cliente.getCPF() + " Senha: " + cliente.getSenha() + " Nome: " + cliente.getNome());
 	}
 }

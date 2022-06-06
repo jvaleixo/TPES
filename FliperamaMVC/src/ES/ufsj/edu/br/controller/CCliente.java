@@ -31,12 +31,12 @@ public class CCliente {
 	
 	public int cadastrarCliente(Cliente c) {
 		int n = pCliente.incluir(c);
-		return n;
 		//pCliente.imprimirLista();
+		return n;
 	}
 	
-	public int fazerLogin(String nome, String senha) {
-		int n = pCliente.checarUsuarioSenha(nome, senha);
+	public int fazerLogin(int cpf, String senha) {
+		int n = pCliente.checarCPFSenha(cpf, senha);
 		return n;
 	}
 }

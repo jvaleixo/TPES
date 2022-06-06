@@ -31,16 +31,18 @@ public class Janela implements ActionListener{
 	private JButton botaoSair;
 	
 	private JPanel painelCC;	//painel cadastrar cliente
-	private JLabel labelUsuario;
-	private JTextField textoUsuario;
+	private JLabel labelNome;
+	private JTextField textoNome;
+	private JLabel labelCPF;
+	private JTextField textoCPF;
 	private JLabel labelSenha;
 	private JPasswordField textoSenha;
 	private JButton botaoConfirmar;
 	private JButton botaoCancelar;
 	
 	private JPanel painelFL;	//painel fazer login
-	private JLabel labelUsuarioFL;
-	private JTextField textoUsuarioFL;
+	private JLabel labelCPFFL;
+	private JTextField textoCPFFL;
 	private JLabel labelSenhaFL;
 	private JPasswordField textoSenhaFL;
 	private JButton botaoLogin;
@@ -99,29 +101,37 @@ public class Janela implements ActionListener{
 		painelCC = new JPanel();
 		painelCC.setLayout(null);
 		
-		labelUsuario = new JLabel("Usuario");
-		labelUsuario.setBounds(10, 20, 80, 25);	//x, y, width, height
-		painelCC.add(labelUsuario);
+		labelNome = new JLabel("Nome");
+		labelNome.setBounds(10, 10, 80, 25);	//x, y, width, height
+		painelCC.add(labelNome);
 		
-		textoUsuario = new JTextField();
-		textoUsuario.setBounds(100, 20, 165, 25);
-		painelCC.add(textoUsuario);
+		textoNome = new JTextField();
+		textoNome.setBounds(100, 10, 165, 25);
+		painelCC.add(textoNome);
+		
+		labelCPF = new JLabel("CPF");
+		labelCPF.setBounds(10, 40, 80, 25);	//x, y, width, height
+		painelCC.add(labelCPF);
+		
+		textoCPF = new JTextField();
+		textoCPF.setBounds(100, 40, 165, 25);
+		painelCC.add(textoCPF);
 		
 		labelSenha = new JLabel("Senha");
-		labelSenha.setBounds(10, 50, 80, 25);
+		labelSenha.setBounds(10, 70, 80, 25);
 		painelCC.add(labelSenha);
 		
 		textoSenha = new JPasswordField();
-		textoSenha.setBounds(100, 50, 165, 25);
+		textoSenha.setBounds(100, 70, 165, 25);
 		painelCC.add(textoSenha);
 		
 		botaoConfirmar = new JButton("Confirmar");
-		botaoConfirmar.setBounds(10, 80, 100, 25);
+		botaoConfirmar.setBounds(10, 100, 100, 25);
 		botaoConfirmar.addActionListener(this);
 		painelCC.add(botaoConfirmar);
 		
 		botaoCancelar = new JButton("Cancelar");
-		botaoCancelar.setBounds(165, 80, 100, 25);
+		botaoCancelar.setBounds(165, 100, 100, 25);
 		botaoCancelar.addActionListener(this);
 		painelCC.add(botaoCancelar);
 		
@@ -129,13 +139,13 @@ public class Janela implements ActionListener{
 		painelFL = new JPanel();
 		painelFL.setLayout(null);
 		
-		labelUsuarioFL = new JLabel("Usuario");
-		labelUsuarioFL.setBounds(10, 20, 80, 25);	//x, y, width, height
-		painelFL.add(labelUsuarioFL);
+		labelCPFFL = new JLabel("CPF");
+		labelCPFFL.setBounds(10, 20, 80, 25);	//x, y, width, height
+		painelFL.add(labelCPFFL);
 		
-		textoUsuarioFL = new JTextField();
-		textoUsuarioFL.setBounds(100, 20, 165, 25);
-		painelFL.add(textoUsuarioFL);
+		textoCPFFL = new JTextField();
+		textoCPFFL.setBounds(100, 20, 165, 25);
+		painelFL.add(textoCPFFL);
 		
 		labelSenhaFL = new JLabel("Senha");
 		labelSenhaFL.setBounds(10, 50, 80, 25);
@@ -202,17 +212,20 @@ public class Janela implements ActionListener{
 	    	System.exit(0);
 		}
 		else if (e.getSource() == botaoConfirmar) {	
-			String nome = textoUsuario.getText();
+			String nome = textoNome.getText();
+			int cpf = Integer.parseInt(textoCPF.getText());
 		    String senha = new String(textoSenha.getPassword()); 
-			Cliente c = new Cliente(nome, senha);
+			Cliente c = new Cliente(nome, senha, cpf);
 			int n = cCliente.cadastrarCliente(c);
 			if (n == 0) {
-				JOptionPane.showMessageDialog(null, "Nome de usuário indisponível", "Erro", JOptionPane.ERROR_MESSAGE);
-				textoUsuario.setText("");
+				JOptionPane.showMessageDialog(null, "CPF já cadastrado", "Erro", JOptionPane.ERROR_MESSAGE);
+				textoNome.setText("");
+				textoCPF.setText("");
 				textoSenha.setText("");
 			}
 			else {
-				textoUsuario.setText("");
+				textoNome.setText("");
+				textoCPF.setText("");
 				textoSenha.setText("");
 				moldura.remove(painelCC);
 				moldura.add(painelMP);
@@ -223,7 +236,7 @@ public class Janela implements ActionListener{
 		}
 		else if (e.getSource() == botaoCancelar) {
 			if (JOptionPane.showConfirmDialog(null, "Deseja cancelar?", "Confirmacao cancelamento", JOptionPane.YES_NO_OPTION) == 0) {
-				textoUsuario.setText("");
+				textoNome.setText("");
 				textoSenha.setText("");
 				moldura.remove(painelCC);
 				moldura.add(painelMP);
@@ -233,16 +246,16 @@ public class Janela implements ActionListener{
 			}
 		}
 		else if (e.getSource() == botaoLogin) {
-			String nome = textoUsuarioFL.getText();
+			int cpf = Integer.parseInt(textoCPFFL.getText());
 		    String senha = new String(textoSenhaFL.getPassword()); 
-			int n = cCliente.fazerLogin(nome, senha);
+			int n = cCliente.fazerLogin(cpf, senha);
 			if (n == 0) {
-				JOptionPane.showMessageDialog(null, "Usuario ou senha incorretos", "Erro", JOptionPane.ERROR_MESSAGE);
-				textoUsuarioFL.setText("");
+				JOptionPane.showMessageDialog(null, "CPF ou senha inválido", "Erro", JOptionPane.ERROR_MESSAGE);
+				textoCPFFL.setText("");
 				textoSenhaFL.setText("");
 			}
 			else {
-				textoUsuarioFL.setText("");
+				textoCPFFL.setText("");
 				textoSenhaFL.setText("");
 				moldura.remove(painelFL);
 				moldura.add(painelMC);
@@ -252,7 +265,7 @@ public class Janela implements ActionListener{
 			}
 		}
 		else if (e.getSource() == botaoVoltar) {	//deve ter confirmacao de cancelamento?
-			textoUsuarioFL.setText("");
+			textoCPFFL.setText("");
 			textoSenhaFL.setText("");
 			moldura.remove(painelFL);
 			moldura.add(painelMP);

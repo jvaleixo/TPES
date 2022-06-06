@@ -4,8 +4,8 @@ import ES.ufsj.edu.br.util.Scan;
 
 public class Atendente extends Usuario{
 
-	public Atendente(String n, String s) {
-		super(n, s, true);
+	public Atendente(String n, String s, int cpf) {
+		super(n, s, cpf, true);
 	}
 	
 	public void cadastrarCliente(Cliente c, int cred) {
