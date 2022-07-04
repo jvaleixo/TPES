@@ -82,6 +82,15 @@ public class PCliente {
 		}
 	}
 	
+	public Cliente getCliente(long cpf) {
+		for (Cliente cliente : clientes) {
+			if(cpf == cliente.getCPF()) {
+				return cliente;
+			}
+		}
+		return null;
+	}
+	
 	public int buscarCliente(Cliente c) {
 		for (Cliente cliente : clientes) {
 			if(c.getCPF() == cliente.getCPF()) {

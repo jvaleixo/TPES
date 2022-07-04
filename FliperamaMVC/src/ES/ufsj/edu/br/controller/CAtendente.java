@@ -1,8 +1,8 @@
 package ES.ufsj.edu.br.controller;
-
+import ES.ufsj.edu.br.model.*;
+import ES.ufsj.edu.br.persistencia.PCliente;
 import java.io.IOException;
 
-import ES.ufsj.edu.br.model.Atendente;
 import ES.ufsj.edu.br.persistencia.PAtendente;
 
 public class CAtendente {
@@ -24,14 +24,9 @@ public class CAtendente {
 		}
 	}
 	
-	public int cadastrarAtendente(Atendente a) {
-		int n = pAtendente.incluir(a);
-		//pAtendente.imprimirLista();
-		return n;
-	}
-	
 	public int fazerLogin(long cpf, String senha) {
 		int n = pAtendente.checarCPFSenha(cpf, senha);
 		return n;
 	}
+
 }

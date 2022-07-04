@@ -14,6 +14,10 @@ public class CCliente {
 		return n;
 	}
 	
+	public PCliente getClientes() {
+		return this.pCliente;
+	}
+	
 	public void salvarClientes() {
 		try {
 			pCliente.salvarClientes();
@@ -33,5 +37,9 @@ public class CCliente {
 	public int fazerLogin(long cpf, String senha) {
 		int n = pCliente.checarCPFSenha(cpf, senha);
 		return n;
+	}
+	
+	public Cliente buscaClienteA(long cpf) {
+		return pCliente.getCliente(cpf);
 	}
 }
