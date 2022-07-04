@@ -2,6 +2,7 @@ package ES.ufsj.edu.br.controller;
 
 import java.io.IOException;
 
+import ES.ufsj.edu.br.model.Atendente;
 import ES.ufsj.edu.br.persistencia.PAtendente;
 
 public class CAtendente {
@@ -21,6 +22,12 @@ public class CAtendente {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int cadastrarAtendente(Atendente a) {
+		int n = pAtendente.incluir(a);
+		//pAtendente.imprimirLista();
+		return n;
 	}
 	
 	public int fazerLogin(long cpf, String senha) {
