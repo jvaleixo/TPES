@@ -1,7 +1,5 @@
 package ES.ufsj.edu.br.model;
 
-import ES.ufsj.edu.br.util.Scan;
-
 public class Cliente extends Usuario{
 	private int creditos;
 	

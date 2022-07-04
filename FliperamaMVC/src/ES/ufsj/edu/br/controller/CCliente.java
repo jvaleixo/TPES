@@ -9,14 +9,9 @@ import ES.ufsj.edu.br.persistencia.PCliente;
 public class CCliente {
 	private PCliente pCliente = new PCliente();
 	
-	public void carregarClientes() {
-		try {
-			pCliente.carregarClientes();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public int carregarClientes() {
+		int n = pCliente.carregar();
+		return n;
 	}
 	
 	public void salvarClientes() {

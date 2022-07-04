@@ -11,7 +11,11 @@ import ES.ufsj.edu.br.view.*;
 public class Main {
 	public static void main(String[] args) {
 		PCliente pCliente = new PCliente();
+		PAtendente pAtendente = new PAtendente();
+		
 		//pCliente.imprimirLista();
+		//pAtendente.imprimirListaAtendente();
+		
 		Janela J = new Janela();
 	}
 }

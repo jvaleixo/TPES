@@ -51,6 +51,20 @@ public class PCliente {
 		}
 	}
 	
+	public int carregar() {
+		if (clientes.size() == 0) {
+			try {
+				carregarClientes();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return 1;
+		}
+		else
+			return 0;
+	}
+	
 	public void salvarClientes() throws FileNotFoundException, IOException {
 		JFileChooser selecionaArquivo = new JFileChooser();
 		selecionaArquivo.setDialogTitle("Selecione o arquivo para salvar os dados");

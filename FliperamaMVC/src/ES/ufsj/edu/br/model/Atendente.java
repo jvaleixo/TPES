@@ -1,14 +1,12 @@
 package ES.ufsj.edu.br.model;
 
-import ES.ufsj.edu.br.util.Scan;
-
 public class Atendente extends Usuario{
 
-	public Atendente(String n, String s, int cpf) {
+	public Atendente(String n, String s, long cpf) {
 		super(n, s, cpf, true);
 	}
 	
-	public void cadastrarCliente(Cliente c, int cred) {
+	/*public void cadastrarCliente(Cliente c, int cred) {
 		c.setCreditos(cred);
 	}
 	public void cadastrarAtendente(String n, String s) {
@@ -31,5 +29,5 @@ public class Atendente extends Usuario{
 	}
 	public void gereciarCreditos(Cliente c, int cred) {
 		
-	}
+	}*/
 }

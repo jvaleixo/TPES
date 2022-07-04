@@ -8,7 +8,7 @@ public class Jogo {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public void setpontuacao(int pontuancao) {
+	public void setpontuacao(int pontuacao) {
 		this.pontuacao = pontuacao;
 	}
 	//get
