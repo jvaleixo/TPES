@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ES.ufsj.edu.br.model.Atendente;
+import ES.ufsj.edu.br.model.Cliente;
 
 public class PAtendente {
 	private List<Atendente> atendentes;
@@ -51,6 +52,15 @@ public class PAtendente {
 		arquivoW.close();
 	}
 	
+	public Atendente getAtendente(long cpf) {
+		for (Atendente atendente : atendentes) {
+			if(cpf == atendente.getCPF()) {
+				return atendente;
+			}
+		}
+		return null;
+	}
+	
 	public int buscarAtendente(Atendente a) {
 		for (Atendente atendente : atendentes) {
 			if(a.getCPF() == atendente.getCPF()) {
@@ -64,6 +74,15 @@ public class PAtendente {
 		int n = buscarAtendente(a);
 		if (n == 1) {
 			atendentes.add(a);
+			return 1;
+		}
+		return 0;
+	}
+	
+	public int remover(long cpf) {
+		Atendente a = getAtendente(cpf);
+		if(a != null) {
+			atendentes.remove(a);
 			return 1;
 		}
 		return 0;

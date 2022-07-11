@@ -5,7 +5,7 @@ public class Cliente extends Usuario{
 	
 	public Cliente(String n, String s, long cpf) {
 		super(n, s, cpf,  false);
-		this.setCreditos(0);
+		//this.setCreditos(0);
 	}
 	//set
 	public void setCreditos(int creditos) {

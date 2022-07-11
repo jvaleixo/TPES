@@ -55,9 +55,37 @@ public class Janela implements ActionListener{
 	
 	private JPanel painelMA;	//painel menu atendente
 	private JButton botaoBuscarCliente;
+	private JButton botaoApagarCliente;
 	private JButton botaoCadastrarAtendente;
+	private JButton botaoApagarAtendente;
 	private JButton botaoCadastrarJogo;
+	private JButton botaoApagarJogo;
 	private JButton botaoLogoutMA;
+	
+	private JPanel BuscaClienteA; //painel da busca do cliente no menu do atendente
+	private JTextField textoBuscaClienteA;
+	private JLabel labelCpfClienteA;
+	private JButton botaoConfirmaClienteA;
+	private JButton botaoVoltarClienteA;
+	
+	private JPanel painelVCA;	//painel visualizar cliente (atendente)
+	private JLabel nomeVCA;
+	private JLabel creditosVCA;
+	private JLabel CPFVCA;
+	private JButton botaoAdicionarCreditos;
+	private JButton botaoVoltarVCA;
+	
+	private JPanel painelApagar;	//painel apagar cliente/atendente
+	private JLabel cpfA;
+	private JTextField textoA;
+	private JButton botaoConfirmarA;
+	private JButton botaoVoltarA;
+	
+	private JPanel painelAC;	//painel adicionar creditos
+	private JLabel creditosAC;
+	private JTextField textoAC;
+	private JButton botaoAdicionarAC;
+	private JButton botaoVoltarAC;
 	
 	public Janela () {
 		cAtendente.carregarAtendentes();
@@ -182,29 +210,107 @@ public class Janela implements ActionListener{
 		botaoLogoutMC.addActionListener(this);
 		painelMC.add(botaoLogoutMC);
 		
-		//painel menu atendente (sem funcionalidades ainda)
+		//painel menu atendente
 		painelMA = new JPanel();
 		painelMA.setLayout(null);
 		
 		botaoBuscarCliente = new JButton("Buscar Cliente");
-		botaoBuscarCliente.setBounds(90, 10, 155, 25);	//x y width height
+		botaoBuscarCliente.setBounds(10, 10, 155, 25);	//x y width height
 		botaoBuscarCliente.addActionListener(this);
 		painelMA.add(botaoBuscarCliente);
 		
+		botaoApagarCliente = new JButton("Apagar Cliente");
+		botaoApagarCliente.setBounds(170, 10, 155, 25);
+		botaoApagarCliente.addActionListener(this);
+		painelMA.add(botaoApagarCliente);
+		
 		botaoCadastrarAtendente = new JButton("Cadastrar Atendente");
-		botaoCadastrarAtendente.setBounds(90, 40, 155, 25);
+		botaoCadastrarAtendente.setBounds(10, 40, 155, 25);
 		botaoCadastrarAtendente.addActionListener(this);
 		painelMA.add(botaoCadastrarAtendente);
 		
-		botaoCadastrarJogo = new JButton("Cadastrar Jogo");
-		botaoCadastrarJogo.setBounds(90, 70, 155, 25);
+		botaoApagarAtendente = new JButton("Apagar Atendente");
+		botaoApagarAtendente.setBounds(170, 40, 155, 25);
+		botaoApagarAtendente.addActionListener(this);
+		painelMA.add(botaoApagarAtendente);
+		
+		botaoCadastrarJogo = new JButton("Cadastrar Jogo");	//TODO: CADASTRAR JOGO
+		botaoCadastrarJogo.setBounds(10, 70, 155, 25);
 		botaoCadastrarJogo.addActionListener(this);
 		painelMA.add(botaoCadastrarJogo);
+		
+		botaoApagarJogo = new JButton("Apagar Jogo");	//TODO: Apagar JOGO
+		botaoApagarJogo.setBounds(170, 70, 155, 25);
+		botaoApagarJogo.addActionListener(this);
+		painelMA.add(botaoApagarJogo);
 		
 		botaoLogoutMA = new JButton("Logout");
 		botaoLogoutMA.setBounds(185, 100, 80, 25);
 		botaoLogoutMA.addActionListener(this);
 		painelMA.add(botaoLogoutMA);
+		
+		BuscaClienteA = new JPanel();	//painel busca cliente
+		BuscaClienteA.setLayout(null);
+		textoBuscaClienteA = new JTextField();
+		textoBuscaClienteA.setBounds(100, 20, 165, 25);
+		labelCpfClienteA = new JLabel("CPF");
+		labelCpfClienteA.setBounds(60, 20, 165, 25);
+		botaoConfirmaClienteA = new JButton("Confirmar");
+		botaoConfirmaClienteA.setBounds(40, 100, 80, 25);
+		botaoConfirmaClienteA.addActionListener(this);
+		botaoVoltarClienteA = new JButton("Voltar");
+		botaoVoltarClienteA.setBounds(140, 100, 80, 25);
+		botaoVoltarClienteA.addActionListener(this);
+		BuscaClienteA.add(textoBuscaClienteA);
+		BuscaClienteA.add(labelCpfClienteA);
+		BuscaClienteA.add(botaoConfirmaClienteA);
+		BuscaClienteA.add(botaoVoltarClienteA);
+		
+		painelVCA = new JPanel();	//painel visualizar cliente
+		painelVCA.setLayout(null);
+		botaoAdicionarCreditos = new JButton("Adicionar Creditos");
+		botaoAdicionarCreditos.setBounds(10, 70, 140, 25);
+		botaoAdicionarCreditos.addActionListener(this);
+		botaoVoltarVCA = new JButton("Voltar");
+		botaoVoltarVCA.setBounds(240, 100, 80, 25);
+		botaoVoltarVCA.addActionListener(this);
+		painelVCA.add(botaoAdicionarCreditos);
+		painelVCA.add(botaoVoltarVCA);
+		
+		painelApagar = new JPanel();	//painel apagar
+		painelApagar.setLayout(null);
+		textoA = new JTextField();
+		textoA.setBounds(100, 20, 165, 25);
+		cpfA = new JLabel("CPF");
+		cpfA.setBounds(60, 20, 165, 25);
+		botaoConfirmarA = new JButton("Confirmar");
+		botaoConfirmarA.setBounds(40, 100, 80, 25);
+		botaoConfirmarA.addActionListener(this);
+		botaoVoltarA = new JButton("Voltar");
+		botaoVoltarA.setBounds(140, 100, 80, 25);
+		botaoVoltarA.addActionListener(this);
+		painelApagar.add(textoA);
+		painelApagar.add(cpfA);
+		painelApagar.add(botaoConfirmarA);
+		painelApagar.add(botaoVoltarA);
+		
+		painelAC = new JPanel();	//painel adicionar creditos
+		painelAC.setLayout(null);
+		creditosAC = new JLabel("Creditos");
+		creditosAC.setBounds(40, 20, 165, 25);
+		textoAC = new JTextField();
+		textoAC.setBounds(100, 20, 165, 25);
+		botaoAdicionarAC = new JButton("Confirmar");
+		botaoAdicionarAC.setBounds(40, 100, 80, 25);
+		botaoAdicionarAC.addActionListener(this);
+		botaoVoltarAC = new JButton("Voltar");
+		botaoVoltarAC.setBounds(140, 100, 80, 25);
+		botaoVoltarAC.addActionListener(this);
+		painelAC.add(creditosAC);
+		painelAC.add(textoAC);
+		painelAC.add(botaoAdicionarAC);
+		painelAC.add(botaoVoltarAC);
+		
 		
 		moldura.add(painelMP);
 		moldura.setVisible(true);
@@ -215,9 +321,10 @@ public class Janela implements ActionListener{
 		if (e.getSource() == carregar_lista) {
 			int n = cCliente.carregarClientes();
 			if (n == 0) {
-				JOptionPane.showMessageDialog(null, "Só é possível carregar uma lista de clientes caso a atual esteja vazia", "Erro", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "So e possivel carregar uma lista de clientes caso a atual esteja vazia", "Erro", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		//painel menu principal
 		else if (e.getSource() == botaoCC) {
 	    	moldura.remove(painelMP);
 	    	
@@ -241,6 +348,7 @@ public class Janela implements ActionListener{
 			moldura.setVisible(false);
 	    	System.exit(0);
 		}
+		//painel cadastrar cliente/atendente
 		else if (e.getSource() == botaoConfirmar) {	
 			try {
 				String nome = textoNome.getText();
@@ -250,7 +358,7 @@ public class Janela implements ActionListener{
 					Cliente c = new Cliente(nome, senha, cpf);
 					int n = cCliente.cadastrarCliente(c);
 					if (n == 0) {
-						JOptionPane.showMessageDialog(null, "CPF já cadastrado", "Erro", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "CPF ja cadastrado", "Erro", JOptionPane.ERROR_MESSAGE);
 						textoNome.setText("");
 						textoCPF.setText("");
 						textoSenha.setText("");
@@ -271,7 +379,7 @@ public class Janela implements ActionListener{
 					Atendente a = new Atendente(nome, senha, cpf);
 					int n = cAtendente.cadastrarAtendente(a);
 					if (n == 0) {
-						JOptionPane.showMessageDialog(null, "CPF já cadastrado", "Erro", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "CPF ja cadastrado", "Erro", JOptionPane.ERROR_MESSAGE);
 						textoNome.setText("");
 						textoCPF.setText("");
 						textoSenha.setText("");
@@ -289,7 +397,7 @@ public class Janela implements ActionListener{
 					}
 				}
 			} catch (NumberFormatException t) {
-				JOptionPane.showMessageDialog(null, "CPF deve conter apenas números", "Erro", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "CPF deve conter apenas numeros", "Erro", JOptionPane.ERROR_MESSAGE);
 				textoNome.setText("");
 				textoCPF.setText("");
 				textoSenha.setText("");
@@ -316,6 +424,7 @@ public class Janela implements ActionListener{
 				}
 			}
 		}
+		//painel fazer login
 		else if (e.getSource() == botaoLogin) {
 			try {
 				long cpf = Long.parseLong(textoCPFFL.getText());
@@ -324,7 +433,7 @@ public class Janela implements ActionListener{
 				int m = cAtendente.fazerLogin(cpf, senha);
 				if (n == m) {
 					//TODO: nao permitir CPFs iguais para usuarios/atendentes
-					JOptionPane.showMessageDialog(null, "CPF ou senha inválido", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "CPF ou senha invalido", "Erro", JOptionPane.ERROR_MESSAGE);
 					textoCPFFL.setText("");
 					textoSenhaFL.setText("");
 				}
@@ -347,7 +456,7 @@ public class Janela implements ActionListener{
 					moldura.setVisible(true);
 				}
 			} catch (NumberFormatException t) {
-				JOptionPane.showMessageDialog(null, "CPF deve conter apenas números", "Erro", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "CPF deve conter apenas numeros", "Erro", JOptionPane.ERROR_MESSAGE);
 				textoCPFFL.setText("");
 				textoSenhaFL.setText("");
 			}
@@ -361,9 +470,26 @@ public class Janela implements ActionListener{
 			moldura.setVisible(false);
 			moldura.setVisible(true);
 		}
+		//painel menu cliente
 		else if (e.getSource() == botaoLogoutMC) {
 			moldura.remove(painelMC);
 			moldura.add(painelFL);
+			moldura.validate();
+			moldura.setVisible(false);
+			moldura.setVisible(true);
+		}
+		//painel menu atendente
+		else if(e.getSource() == botaoBuscarCliente) {
+			moldura.remove(painelMA);
+			moldura.add(BuscaClienteA);
+			moldura.validate();
+			moldura.setVisible(false);
+			moldura.setVisible(true);
+		}
+		else if (e.getSource() == botaoApagarCliente){
+			moldura.remove(painelMA);
+			moldura.setTitle("Apagar Cliente");
+			moldura.add(painelApagar);
 			moldura.validate();
 			moldura.setVisible(false);
 			moldura.setVisible(true);
@@ -376,9 +502,163 @@ public class Janela implements ActionListener{
 			moldura.setVisible(false);
 			moldura.setVisible(true);
 		}
+		
+		else if (e.getSource() == botaoApagarAtendente){
+			moldura.remove(painelMA);
+			moldura.setTitle("Apagar Atendente");
+			moldura.add(painelApagar);
+			moldura.validate();
+			moldura.setVisible(false);
+			moldura.setVisible(true);
+		}
 		else if (e.getSource() == botaoLogoutMA) {
 			moldura.remove(painelMA);
 			moldura.add(painelFL);
+			moldura.validate();
+			moldura.setVisible(false);
+			moldura.setVisible(true);
+		}
+		//painel buscar cliente
+		else if(e.getSource() == botaoConfirmaClienteA) {
+			try {
+				//TODO: arrumar erro no try/catch
+				long cpf = Long.parseLong(textoBuscaClienteA.getText());
+			    Cliente c = cCliente.buscaClienteA(cpf);
+				if (c == null) {
+					JOptionPane.showMessageDialog(null, "Cliente nao cadastrado", "Erro", JOptionPane.ERROR_MESSAGE);
+					textoBuscaClienteA.setText("");
+				}
+				else {
+					textoBuscaClienteA.setText("");
+					moldura.remove(BuscaClienteA);
+					
+					nomeVCA = new JLabel("Nome: " + cCliente.dadosCliente()[0]);
+					nomeVCA.setBounds(10, 0, 250, 25);
+					painelVCA.add(nomeVCA);
+					CPFVCA = new JLabel("CPF: " + cCliente.dadosCliente()[1]);
+					CPFVCA.setBounds(10, 20, 250, 25);
+					painelVCA.add(CPFVCA);
+					creditosVCA = new JLabel("Creditos: " + cCliente.dadosCliente()[2]);
+					creditosVCA.setBounds(10, 40, 250, 25);
+					painelVCA.add(creditosVCA);
+					
+					moldura.add(painelVCA);
+					moldura.validate();
+					moldura.setVisible(false);
+					moldura.setVisible(true);
+				}
+			} catch (NumberFormatException t) {
+				JOptionPane.showMessageDialog(null, "CPF deve conter apenas numeros", "Erro", JOptionPane.ERROR_MESSAGE);
+				textoBuscaClienteA.setText("");
+			}
+		}
+		else if (e.getSource() == botaoVoltarClienteA) {
+			textoBuscaClienteA.setText("");
+			moldura.remove(BuscaClienteA);
+			moldura.add(painelMA);
+			moldura.validate();
+			moldura.setVisible(false);
+			moldura.setVisible(true);
+		}
+		//painel apagar cliente/atendente
+		else if (e.getSource() == botaoConfirmarA) {
+			try {
+				//TODO: arrumar erro no try/catch
+				long cpf = Long.parseLong(textoA.getText());
+				if(moldura.getTitle() == "Apagar Cliente") {
+					if (JOptionPane.showConfirmDialog(null, "Deseja apagar o cliente?", "Confirmacao de remocao", JOptionPane.YES_NO_OPTION) == 0) {
+						int n = cCliente.apagarCliente(cpf);
+						if (n == 0) {
+							JOptionPane.showMessageDialog(null, "Cliente nao cadastrado", "Erro", JOptionPane.ERROR_MESSAGE);
+							textoA.setText("");
+						}
+						else {
+							textoA.setText("");
+							moldura.setTitle("Fliperama Menu");
+							moldura.remove(painelApagar);
+							moldura.add(painelMA);
+							moldura.validate();
+							moldura.setVisible(false);
+							moldura.setVisible(true);
+						}
+					}
+				}
+				else if(moldura.getTitle() == "Apagar Atendente") {
+					if (JOptionPane.showConfirmDialog(null, "Deseja apagar o atendente?", "Confirmacao de remocao", JOptionPane.YES_NO_OPTION) == 0) {
+						int n = cAtendente.apagarAtendente(cpf);
+						if (n == 0) {
+							JOptionPane.showMessageDialog(null, "Atendente nao cadastrado", "Erro", JOptionPane.ERROR_MESSAGE);
+							textoA.setText("");
+						}
+						else {
+							textoA.setText("");
+							moldura.setTitle("Fliperama Menu");
+							moldura.remove(painelApagar);
+							moldura.add(painelMA);
+							moldura.validate();
+							moldura.setVisible(false);
+							moldura.setVisible(true);
+							moldura.remove(painelCC);
+						}
+					}
+				}
+			}catch (NumberFormatException t) {
+				JOptionPane.showMessageDialog(null, "CPF deve conter apenas numeros", "Erro", JOptionPane.ERROR_MESSAGE);
+				textoCPF.setText("");
+			}
+		}
+		else if (e.getSource() == botaoVoltarA) {
+			textoA.setText("");
+			moldura.remove(painelApagar);
+			moldura.add(painelMA);
+			moldura.validate();
+			moldura.setVisible(false);
+			moldura.setVisible(true);
+		}
+		//painel visualizar cliente (atendente)
+		else if (e.getSource() == botaoAdicionarCreditos) {
+			moldura.remove(painelVCA);
+			moldura.add(painelAC);
+			moldura.validate();
+			moldura.setVisible(false);
+			moldura.setVisible(true);
+		}
+		else if (e.getSource() == botaoVoltarVCA) {
+			cCliente.desmarcarCliente();
+			painelVCA.remove(nomeVCA);
+			painelVCA.remove(CPFVCA);
+			painelVCA.remove(creditosVCA);
+			moldura.remove(painelVCA);
+			moldura.add(BuscaClienteA);
+			moldura.validate();
+			moldura.setVisible(false);
+			moldura.setVisible(true);
+		}
+		
+		//painel adicionar creditos
+		else if (e.getSource() == botaoAdicionarAC) {
+			try {
+				int n = Integer.parseInt(textoAC.getText());
+				cCliente.adicionarCreditos(n);
+				textoAC.setText("");
+				moldura.remove(painelAC);
+				painelVCA.remove(creditosVCA);
+				creditosVCA = new JLabel("Creditos: " + cCliente.dadosCliente()[2]);
+				creditosVCA.setBounds(10, 40, 250, 25);
+				painelVCA.add(creditosVCA);
+				moldura.add(painelVCA);
+				moldura.validate();
+				moldura.setVisible(false);
+				moldura.setVisible(true);
+			} catch (NumberFormatException t) {
+				JOptionPane.showMessageDialog(null, "Creditos deve conter apenas numeros", "Erro", JOptionPane.ERROR_MESSAGE);
+				textoAC.setText("");
+			}
+		}
+		else if (e.getSource() == botaoVoltarAC) {
+			textoAC.setText("");
+			moldura.remove(painelAC);
+			moldura.add(painelVCA);
 			moldura.validate();
 			moldura.setVisible(false);
 			moldura.setVisible(true);

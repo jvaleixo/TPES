@@ -30,6 +30,12 @@ public class CAtendente {
 		return n;
 	}
 	
+	public int apagarAtendente(long cpf) {
+		int n = pAtendente.remover(cpf);
+		//pAtendente.imprimirListaAtendente();
+		return n;
+	}
+	
 	public int fazerLogin(long cpf, String senha) {
 		int n = pAtendente.checarCPFSenha(cpf, senha);
 		return n;

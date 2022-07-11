@@ -33,17 +33,19 @@ public class PCliente {
 			while (linha != null) {
 				String[] dados = linha.split(" ");
 				String cpf = dados[0];
-				String senha = dados[1];
+				String creditos = dados[1];
+				String senha = dados[2];
 				int i = 0;
-				String nome = dados[2];
+				String nome = dados[3];
 				for( String dado : dados) {
-					if (i > 2) {
+					if (i > 3) {
 						nome = nome.concat(" ");
 						nome = nome.concat(dado);
 					}
 					i++;
 				}
 				Cliente c = new Cliente(nome, senha, Long.parseLong(cpf));
+				c.setCreditos(Integer.parseInt(creditos));
 				clientes.add(c);
 				linha = br.readLine();
 			}
@@ -73,13 +75,22 @@ public class PCliente {
 		if (n == JFileChooser.APPROVE_OPTION) {
 			FileWriter arquivoW = new FileWriter(selecionaArquivo.getSelectedFile().getAbsolutePath());
 			for(Cliente cliente : clientes) {
-				arquivoW.write(cliente.getCPF() + " " + cliente.getSenha() + " " + cliente.getNome() + "\n");
+				arquivoW.write(cliente.getCPF() + " " + cliente.getCreditos() + " " + cliente.getSenha() + " " + cliente.getNome() + "\n");
 			}
 			arquivoW.close();
 		}
 		else {
 			System.exit(0);
 		}
+	}
+	
+	public Cliente getCliente(long cpf) {
+		for (Cliente cliente : clientes) {
+			if(cpf == cliente.getCPF()) {
+				return cliente;
+			}
+		}
+		return null;
 	}
 	
 	public int buscarCliente(Cliente c) {
@@ -94,10 +105,25 @@ public class PCliente {
 	public int incluir(Cliente c) {
 		int n = buscarCliente(c);
 		if (n == 1) {
+			c.setCreditos(0);
 			clientes.add(c);
 			return 1;
 		}
 		return 0;
+	}
+	
+	public int remover(long cpf) {
+		Cliente c = getCliente(cpf);
+		if(c != null) {
+			clientes.remove(c);
+			return 1;
+		}
+		return 0;
+	}
+	
+	public void adicionarCreditos(Cliente c, int creditos) {
+		creditos = c.getCreditos() + creditos;
+		c.setCreditos(creditos);
 	}
 	
 	public int checarCPFSenha(long cpf, String senha) {
@@ -110,6 +136,6 @@ public class PCliente {
 	
 	public void imprimirLista() {
 		for (Cliente cliente : clientes)
-			System.out.println("CPF: " + cliente.getCPF() + " Senha: " + cliente.getSenha() + " Nome: " + cliente.getNome());
+			System.out.println("CPF: " + cliente.getCPF() + " Creditos: " + cliente.getCreditos() + " Senha: " + cliente.getSenha() + " Nome: " + cliente.getNome());
 	}
 }
