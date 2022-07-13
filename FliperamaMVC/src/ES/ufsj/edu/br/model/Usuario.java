@@ -39,11 +39,4 @@ public abstract class Usuario {
 	public Boolean getRoot() {
 		return this.root;
 	}
-	
-	public Boolean cadastrarUsuario(String n, String s, long cpf) {
-		this.setNome(n);
-		this.setSenha(s);
-		this.setCPF(cpf);
-	    return true;
-	}
 }
