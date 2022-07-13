@@ -2,12 +2,10 @@ package ES.ufsj.edu.br.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -24,10 +22,6 @@ public class Janela implements ActionListener{
 	private CJogos cJogos = new CJogos();
 	
 	private JFrame moldura;
-	
-	private JMenuBar menu_b;	//barra de menu
-	private JMenu menu_arquivo;
-	private JMenuItem carregar_lista;
 	
 	private JPanel painelMP;	//painel menu principal
 	private JButton botaoCC;
@@ -51,9 +45,6 @@ public class Janela implements ActionListener{
 	private JPasswordField textoSenhaFL;
 	private JButton botaoLogin;
 	private JButton botaoVoltar;
-	
-	private JPanel painelMC;	//painel menu cliente
-	private JButton botaoLogoutMC;
 	
 	private JPanel painelMA;	//painel menu atendente
 	private JButton botaoBuscarCliente;
@@ -101,7 +92,32 @@ public class Janela implements ActionListener{
 	private JButton botaoAdicionarAC;
 	private JButton botaoVoltarAC;
 	
+	private JPanel painelMC;	//painel menu cliente
+	private JButton botaoVisualizarCliente;
+	private JButton botaoAlterarSenha;
+	private JButton botaoAlterarNome;
+	private JButton botaoLogoutMC;
+	
+	private JPanel painelVCC;	//painel visualizar cliente (cliente)
+	private JLabel nomeVCC;
+	private JLabel creditosVCC;
+	private JLabel CPFVCC;
+	private JButton botaoVoltarVCC;
+	
+	private JPanel painelAN;	//painel alterar nome
+	private JLabel labelAN;
+	private JTextField textoAN;
+	private JButton botaoConfirmarAN;
+	private JButton botaoVoltarAN;
+	
+	private JPanel painelAS;	//painel alterar senha
+	private JLabel labelAS;
+	private JPasswordField senhaAS;
+	private JButton botaoConfirmarAS;
+	private JButton botaoVoltarAS;
+	
 	public Janela () {
+		cCliente.carregarClientes();
 		cAtendente.carregarAtendentes();
 		cJogos.carregarJogos();
 		
@@ -120,19 +136,9 @@ public class Janela implements ActionListener{
 		        }
 		});
 		
-		//menu em cima para carregar lista de clientes
-		menu_b = new JMenuBar();
-		menu_arquivo = new JMenu("Arquivo");
-		carregar_lista = new JMenuItem("Carregar lista de clientes");
-		carregar_lista.addActionListener(this);
-		menu_arquivo.add(carregar_lista);
-		menu_b.add(menu_arquivo);
-		moldura.setJMenuBar(menu_b);
-		
 		//painel menu principal
 		painelMP = new JPanel();
 		painelMP.setLayout(null);
-		//moldura.add(painelMP);
 		
 		botaoCC = new JButton("Cadastrar Cliente");
 		botaoCC.setBounds(90, 10, 140, 25);
@@ -217,14 +223,82 @@ public class Janela implements ActionListener{
 		botaoVoltar.addActionListener(this);
 		painelFL.add(botaoVoltar);
 		
-		//painel menu cliente (sem funcionalidades ainda)
+		//painel menu cliente
 		painelMC = new JPanel();
 		painelMC.setLayout(null);
 		
+		botaoVisualizarCliente = new JButton("Visualizar Cliente");
+		botaoVisualizarCliente.setBounds(90, 10, 140, 25);
+		botaoVisualizarCliente.addActionListener(this);
+		painelMC.add(botaoVisualizarCliente);
+		
+		botaoAlterarNome = new JButton("Alterar Nome");
+		botaoAlterarNome.setBounds(90, 50, 140, 25);
+		botaoAlterarNome.addActionListener(this);
+		painelMC.add(botaoAlterarNome);
+		
+		botaoAlterarSenha = new JButton("Alterar Senha");
+		botaoAlterarSenha.setBounds(90, 90, 140, 25);
+		botaoAlterarSenha.addActionListener(this);
+		painelMC.add(botaoAlterarSenha);
+		
 		botaoLogoutMC = new JButton("Logout");
-		botaoLogoutMC.setBounds(185, 80, 80, 25);
+		botaoLogoutMC.setBounds(185, 120, 80, 25);
 		botaoLogoutMC.addActionListener(this);
 		painelMC.add(botaoLogoutMC);
+		
+		//painel visualizar cliente (cliente)
+		painelVCC = new JPanel();
+		painelVCC.setLayout(null);
+		
+		botaoVoltarVCC = new JButton("Voltar");
+		botaoVoltarVCC.setBounds(240, 100, 80, 25);
+		botaoVoltarVCC.addActionListener(this);
+		painelVCC.add(botaoVoltarVCC);
+		
+		//painel alterar nome
+		painelAN = new JPanel();
+		painelAN.setLayout(null);
+		
+		labelAN = new JLabel("Novo nome");
+		labelAN.setBounds(20, 20, 165, 25);
+		painelAN.add(labelAN);
+		
+		textoAN = new JTextField();
+		textoAN.setBounds(100, 20, 165, 25);
+		painelAN.add(textoAN);
+		
+		botaoConfirmarAN = new JButton("Confirmar");
+		botaoConfirmarAN.setBounds(40, 100, 100, 25);
+		botaoConfirmarAN.addActionListener(this);
+		painelAN.add(botaoConfirmarAN);
+		
+		botaoVoltarAN = new JButton("Voltar");
+		botaoVoltarAN.setBounds(160, 100, 100, 25);
+		botaoVoltarAN.addActionListener(this);
+		painelAN.add(botaoVoltarAN);
+		
+		//painel alterar senha
+		painelAS = new JPanel();
+		painelAS.setLayout(null);
+		
+		labelAS = new JLabel("Nova senha");
+		labelAS.setBounds(20, 20, 165, 25);
+		painelAS.add(labelAS);
+		
+		senhaAS = new JPasswordField();
+		senhaAS.setBounds(100, 20, 165, 25);
+		painelAS.add(senhaAS);
+		
+		botaoConfirmarAS = new JButton("Confirmar");
+		botaoConfirmarAS.setBounds(40, 100, 100, 25);
+		botaoConfirmarAS.addActionListener(this);
+		painelAS.add(botaoConfirmarAS);
+		
+		botaoVoltarAS = new JButton("Voltar");
+		botaoVoltarAS.setBounds(160, 100, 100, 25);
+		botaoVoltarAS.addActionListener(this);
+		painelAS.add(botaoVoltarAS);
 		
 		//painel menu atendente
 		painelMA = new JPanel();
@@ -250,7 +324,7 @@ public class Janela implements ActionListener{
 		botaoApagarAtendente.addActionListener(this);
 		painelMA.add(botaoApagarAtendente);
 		
-		botaoCadastrarJogo = new JButton("Cadastrar Jogo");	//TODO: CADASTRAR JOGO
+		botaoCadastrarJogo = new JButton("Cadastrar Jogo");
 		botaoCadastrarJogo.setBounds(10, 70, 155, 25);
 		botaoCadastrarJogo.addActionListener(this);
 		painelMA.add(botaoCadastrarJogo);
@@ -317,7 +391,7 @@ public class Janela implements ActionListener{
 		BuscaClienteA.add(botaoConfirmaClienteA);
 		BuscaClienteA.add(botaoVoltarClienteA);
 		
-		painelVCA = new JPanel();	//painel visualizar cliente
+		painelVCA = new JPanel();	//painel visualizar cliente (atendente)
 		painelVCA.setLayout(null);
 		botaoAdicionarCreditos = new JButton("Adicionar Creditos");
 		botaoAdicionarCreditos.setBounds(10, 70, 140, 25);
@@ -362,21 +436,14 @@ public class Janela implements ActionListener{
 		painelAC.add(botaoAdicionarAC);
 		painelAC.add(botaoVoltarAC);
 		
-		
 		moldura.add(painelMP);
 		moldura.setVisible(true);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == carregar_lista) {
-			int n = cCliente.carregarClientes();
-			if (n == 0) {
-				JOptionPane.showMessageDialog(null, "So e possivel carregar uma lista de clientes caso a atual esteja vazia", "Erro", JOptionPane.ERROR_MESSAGE);
-			}
-		}
 		//painel menu principal
-		else if (e.getSource() == botaoCC) {
+		if (e.getSource() == botaoCC) {
 	    	moldura.remove(painelMP);
 	    	
 	    	moldura.setTitle("Cadastrar Cliente");
@@ -395,7 +462,8 @@ public class Janela implements ActionListener{
 		}
 		else if (e.getSource() == botaoSair) {
 			cAtendente.salvarAtendentes();
-			cCliente.salvarClientes();
+	    	cCliente.salvarClientes();
+	    	cJogos.salvarJogos();
 			moldura.setVisible(false);
 	    	System.exit(0);
 		}
@@ -407,7 +475,7 @@ public class Janela implements ActionListener{
 				String senha = new String(textoSenha.getPassword()); 
 				if(moldura.getTitle() == "Cadastrar Cliente") {
 					Cliente c = new Cliente(nome, senha, cpf);
-					int n = cCliente.cadastrarCliente(c);
+					int n = cCliente.cadastrarCliente(c, cAtendente.listaCPFs());
 					if (n == 0) {
 						JOptionPane.showMessageDialog(null, "CPF ja cadastrado", "Erro", JOptionPane.ERROR_MESSAGE);
 						textoNome.setText("");
@@ -428,7 +496,7 @@ public class Janela implements ActionListener{
 				}
 				else if (moldura.getTitle() == "Cadastrar Atendente") {
 					Atendente a = new Atendente(nome, senha, cpf);
-					int n = cAtendente.cadastrarAtendente(a);
+					int n = cAtendente.cadastrarAtendente(a, cCliente.listaCPFs());
 					if (n == 0) {
 						JOptionPane.showMessageDialog(null, "CPF ja cadastrado", "Erro", JOptionPane.ERROR_MESSAGE);
 						textoNome.setText("");
@@ -483,12 +551,12 @@ public class Janela implements ActionListener{
 				int n = cCliente.fazerLogin(cpf, senha);
 				int m = cAtendente.fazerLogin(cpf, senha);
 				if (n == m) {
-					//TODO: nao permitir CPFs iguais para usuarios/atendentes
 					JOptionPane.showMessageDialog(null, "CPF ou senha invalido", "Erro", JOptionPane.ERROR_MESSAGE);
 					textoCPFFL.setText("");
 					textoSenhaFL.setText("");
 				}
 				else if (n==1) {
+					cCliente.buscaClienteA(cpf);
 					textoCPFFL.setText("");
 					textoSenhaFL.setText("");
 					moldura.remove(painelFL);
@@ -512,7 +580,7 @@ public class Janela implements ActionListener{
 				textoSenhaFL.setText("");
 			}
 		}
-		else if (e.getSource() == botaoVoltar) {	//deve ter confirmacao de cancelamento?
+		else if (e.getSource() == botaoVoltar) {
 			textoCPFFL.setText("");
 			textoSenhaFL.setText("");
 			moldura.remove(painelFL);
@@ -522,9 +590,87 @@ public class Janela implements ActionListener{
 			moldura.setVisible(true);
 		}
 		//painel menu cliente
+		else if(e.getSource() == botaoVisualizarCliente) {
+			moldura.remove(painelMC);
+			
+			nomeVCC = new JLabel("Nome: " + cCliente.dadosCliente()[0]);
+			nomeVCC.setBounds(10, 0, 250, 25);
+			painelVCC.add(nomeVCC);
+			CPFVCC = new JLabel("CPF: " + cCliente.dadosCliente()[1]);
+			CPFVCC.setBounds(10, 20, 250, 25);
+			painelVCC.add(CPFVCC);
+			creditosVCC = new JLabel("Creditos: " + cCliente.dadosCliente()[2]);
+			creditosVCC.setBounds(10, 40, 250, 25);
+			painelVCC.add(creditosVCC);
+			
+			moldura.add(painelVCC);
+			moldura.validate();
+			moldura.setVisible(false);
+			moldura.setVisible(true);
+		}
+		else if(e.getSource() == botaoAlterarNome) {
+			moldura.remove(painelMC);
+			moldura.add(painelAN);
+			moldura.validate();
+			moldura.setVisible(false);
+			moldura.setVisible(true);
+		}
+		else if(e.getSource() == botaoAlterarSenha) {
+			moldura.remove(painelMC);
+			moldura.add(painelAS);
+			moldura.validate();
+			moldura.setVisible(false);
+			moldura.setVisible(true);
+		}
 		else if (e.getSource() == botaoLogoutMC) {
+			cCliente.desmarcarCliente();
 			moldura.remove(painelMC);
 			moldura.add(painelFL);
+			moldura.validate();
+			moldura.setVisible(false);
+			moldura.setVisible(true);
+		}
+		//painel visualizar cliente (cliente)
+		else if (e.getSource() == botaoVoltarVCC) {
+			painelVCC.remove(nomeVCC);
+			painelVCC.remove(CPFVCC);
+			painelVCC.remove(creditosVCC);
+			moldura.remove(painelVCC);
+			moldura.add(painelMC);
+			moldura.validate();
+			moldura.setVisible(false);
+			moldura.setVisible(true);
+		}
+		//painel alterar nome
+		else if (e.getSource() == botaoConfirmarAN) {
+			String nome = textoAN.getText();
+			cCliente.alterarNome(nome);
+			moldura.remove(painelAN);
+			moldura.add(painelMC);
+			moldura.validate();
+			moldura.setVisible(false);
+			moldura.setVisible(true);
+		}
+		else if (e.getSource() == botaoVoltarAN) {
+			moldura.remove(painelAN);
+			moldura.add(painelMC);
+			moldura.validate();
+			moldura.setVisible(false);
+			moldura.setVisible(true);
+		}
+		//painel alterar senha
+		else if (e.getSource() == botaoConfirmarAS) {
+			String senha = new String(senhaAS.getPassword());
+			cCliente.alterarSenha(senha);
+			moldura.remove(painelAS);
+			moldura.add(painelMC);
+			moldura.validate();
+			moldura.setVisible(false);
+			moldura.setVisible(true);
+		}
+		else if (e.getSource() == botaoVoltarAS) {
+			moldura.remove(painelAS);
+			moldura.add(painelMC);
 			moldura.validate();
 			moldura.setVisible(false);
 			moldura.setVisible(true);
@@ -572,7 +718,6 @@ public class Janela implements ActionListener{
 		//painel buscar cliente
 		else if(e.getSource() == botaoConfirmaClienteA) {
 			try {
-				//TODO: arrumar erro no try/catch
 				long cpf = Long.parseLong(textoBuscaClienteA.getText());
 			    Cliente c = cCliente.buscaClienteA(cpf);
 				if (c == null) {
@@ -614,7 +759,6 @@ public class Janela implements ActionListener{
 		//painel apagar cliente/atendente
 		else if (e.getSource() == botaoConfirmarA) {
 			try {
-				//TODO: arrumar erro no try/catch
 				long cpf = Long.parseLong(textoA.getText());
 				if(moldura.getTitle() == "Apagar Cliente") {
 					if (JOptionPane.showConfirmDialog(null, "Deseja apagar o cliente?", "Confirmacao de remocao", JOptionPane.YES_NO_OPTION) == 0) {

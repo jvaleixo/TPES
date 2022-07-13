@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ES.ufsj.edu.br.model.Atendente;
 import ES.ufsj.edu.br.model.Jogo;
 
 public class PJogos {
@@ -29,7 +28,7 @@ public class PJogos {
 			String nome = dados[1];
 			int i = 0;
 			for( String dado : dados) {
-				if (i > 2) {
+				if (i > 1) {
 					nome = nome.concat(" ");
 					nome = nome.concat(dado);
 				}
@@ -46,8 +45,8 @@ public class PJogos {
 		File arquivo = new File("./jogos.txt");
 		FileWriter arquivoW = new FileWriter(arquivo.getAbsolutePath());
 		for(Jogo jogo : jogos) {
-			System.out.println(jogo.getNome() + " " + jogo.getPontuacao() +  "\n");
-			arquivoW.write(jogo.getNome() + " " + jogo.getPontuacao() +  "\n");
+			//System.out.println(jogo.getNome() + " " + jogo.getPontuacao() +  "\n");
+			arquivoW.write(jogo.getPontuacao() + " " + jogo.getNome() +  "\n");
 		}
 		arquivoW.close();
 	}

@@ -15,11 +15,4 @@ public class Cliente extends Usuario{
 	public int getCreditos() {
 		return this.creditos;
 	}
-	
-	public void visualizarCliente(Jogo j) {
-		
-	}
-	public void visualizarPontuacao(Jogo j) {
-		
-	}
 }

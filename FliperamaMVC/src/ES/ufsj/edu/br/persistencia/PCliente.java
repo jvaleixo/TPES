@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFileChooser;
-
 import ES.ufsj.edu.br.model.Cliente;
 
 public class PCliente {
@@ -21,36 +19,30 @@ public class PCliente {
 	}
 	
 	public void carregarClientes() throws FileNotFoundException, IOException {
-		JFileChooser selecionaArquivo = new JFileChooser();
-		selecionaArquivo.setDialogTitle("Selecione o arquivo para carregar os dados");
-		selecionaArquivo.setCurrentDirectory(new File("."));
-		int n = selecionaArquivo.showOpenDialog(null);
-		if (n == JFileChooser.APPROVE_OPTION) {
-			File arquivo = new File(selecionaArquivo.getSelectedFile().getAbsolutePath());
-			BufferedReader br = new BufferedReader (new FileReader(arquivo));
-			String linha;
-			linha = br.readLine();
-			while (linha != null) {
-				String[] dados = linha.split(" ");
-				String cpf = dados[0];
-				String creditos = dados[1];
-				String senha = dados[2];
-				int i = 0;
-				String nome = dados[3];
-				for( String dado : dados) {
-					if (i > 3) {
-						nome = nome.concat(" ");
-						nome = nome.concat(dado);
-					}
-					i++;
+		File arquivo = new File("./clientes.txt");
+		BufferedReader br = new BufferedReader (new FileReader(arquivo));
+		String linha;
+		linha = br.readLine();
+		while (linha != null) {
+			String[] dados = linha.split(" ");
+			String cpf = dados[0];
+			String creditos = dados[1];
+			String senha = dados[2];
+			int i = 0;
+			String nome = dados[3];
+			for( String dado : dados) {
+				if (i > 3) {
+					nome = nome.concat(" ");
+					nome = nome.concat(dado);
 				}
-				Cliente c = new Cliente(nome, senha, Long.parseLong(cpf));
-				c.setCreditos(Integer.parseInt(creditos));
-				clientes.add(c);
-				linha = br.readLine();
+				i++;
 			}
-			br.close();
+			Cliente c = new Cliente(nome, senha, Long.parseLong(cpf));
+			c.setCreditos(Integer.parseInt(creditos));
+			clientes.add(c);
+			linha = br.readLine();
 		}
+		br.close();
 	}
 	
 	public int carregar() {
@@ -58,7 +50,6 @@ public class PCliente {
 			try {
 				carregarClientes();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return 1;
@@ -68,20 +59,12 @@ public class PCliente {
 	}
 	
 	public void salvarClientes() throws FileNotFoundException, IOException {
-		JFileChooser selecionaArquivo = new JFileChooser();
-		selecionaArquivo.setDialogTitle("Selecione o arquivo para salvar os dados");
-		selecionaArquivo.setCurrentDirectory(new File("."));
-		int n = selecionaArquivo.showSaveDialog(null);
-		if (n == JFileChooser.APPROVE_OPTION) {
-			FileWriter arquivoW = new FileWriter(selecionaArquivo.getSelectedFile().getAbsolutePath());
-			for(Cliente cliente : clientes) {
-				arquivoW.write(cliente.getCPF() + " " + cliente.getCreditos() + " " + cliente.getSenha() + " " + cliente.getNome() + "\n");
-			}
-			arquivoW.close();
+		File arquivo = new File("./clientes.txt");
+		FileWriter arquivoW = new FileWriter(arquivo.getAbsolutePath());
+		for(Cliente cliente : clientes) {
+			arquivoW.write(cliente.getCPF() + " " + cliente.getCreditos() + " " + cliente.getSenha() + " " + cliente.getNome() + "\n");
 		}
-		else {
-			System.exit(0);
-		}
+		arquivoW.close();
 	}
 	
 	public Cliente getCliente(long cpf) {
@@ -93,23 +76,9 @@ public class PCliente {
 		return null;
 	}
 	
-	public int buscarCliente(Cliente c) {
-		for (Cliente cliente : clientes) {
-			if(c.getCPF() == cliente.getCPF()) {
-				return 0;
-			}
-		}
-		return 1;
-	}
-	
-	public int incluir(Cliente c) {
-		int n = buscarCliente(c);
-		if (n == 1) {
-			c.setCreditos(0);
-			clientes.add(c);
-			return 1;
-		}
-		return 0;
+	public void incluir(Cliente c) {
+		c.setCreditos(0);
+		clientes.add(c);
 	}
 	
 	public int remover(long cpf) {
@@ -132,6 +101,26 @@ public class PCliente {
 				return 1;
 		}
 		return 0;
+	}
+	
+	public ArrayList<Long> getCPFs() {
+		ArrayList<Long> cpfs = new ArrayList<Long>();
+		for (Cliente cliente : clientes) {
+			cpfs.add(cliente.getCPF());
+		}
+		return cpfs;
+	}
+	
+	public void alterarNome(Cliente c, String nome) {
+		clientes.remove(c);
+		c.setNome(nome);
+		clientes.add(c);
+	}
+	
+	public void alterarSenha(Cliente c, String senha) {
+		clientes.remove(c);
+		c.setSenha(senha);
+		clientes.add(c);
 	}
 	
 	public void imprimirLista() {

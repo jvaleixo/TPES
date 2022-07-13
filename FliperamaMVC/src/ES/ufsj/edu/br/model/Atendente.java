@@ -6,28 +6,4 @@ public class Atendente extends Usuario{
 		super(n, s, cpf, true);
 	}
 	
-	/*public void cadastrarCliente(Cliente c, int cred) {
-		c.setCreditos(cred);
-	}
-	public void cadastrarAtendente(String n, String s) {
-		
-	}
-	public void cadastrarJogo(String n) {
-		
-	}
-	public void definir_pontuação(Cliente C, Jogo j, int p) {
-		
-	}
-	public void visualizarCliente(Cliente C) {
-		
-	}
-	public void buscarCliente(Cliente c) {
-		
-	}
-	public void vusualizarPontuacao(Cliente c, Jogo j) {
-		
-	}
-	public void gereciarCreditos(Cliente c, int cred) {
-		
-	}*/
 }

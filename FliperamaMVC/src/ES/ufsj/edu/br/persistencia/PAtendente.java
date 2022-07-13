@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ES.ufsj.edu.br.model.Atendente;
-import ES.ufsj.edu.br.model.Cliente;
 
 public class PAtendente {
 	private List<Atendente> atendentes;
@@ -70,13 +69,8 @@ public class PAtendente {
 		return 1;
 	}
 	
-	public int incluir(Atendente a) {
-		int n = buscarAtendente(a);
-		if (n == 1) {
-			atendentes.add(a);
-			return 1;
-		}
-		return 0;
+	public void incluir(Atendente a) {
+		atendentes.add(a);
 	}
 	
 	public int remover(long cpf) {
@@ -94,6 +88,14 @@ public class PAtendente {
 				return 1;
 		}
 		return 0;
+	}
+	
+	public ArrayList<Long> getCPFs() {
+		ArrayList<Long> cpfs = new ArrayList<Long>();
+		for (Atendente atendente : atendentes) {
+			cpfs.add(atendente.getCPF());
+		}
+		return cpfs;
 	}
 	
 	public void imprimirListaAtendente() {

@@ -2,6 +2,7 @@ package ES.ufsj.edu.br.controller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import ES.ufsj.edu.br.model.Cliente;
 import ES.ufsj.edu.br.persistencia.PCliente;
@@ -29,8 +30,11 @@ public class CCliente {
 		}
 	}
 	
-	public int cadastrarCliente(Cliente c) {
-		int n = pCliente.incluir(c);
+	public int cadastrarCliente(Cliente c, ArrayList<Long> cpfsA) {
+		ArrayList<Long> cpfsC = pCliente.getCPFs();
+		int n = checarCPFs(c.getCPF(), cpfsA, cpfsC);
+			if (n == 1)
+				pCliente.incluir(c);
 		//pCliente.imprimirLista();
 		return n;
 	}
@@ -66,5 +70,30 @@ public class CCliente {
 		else
 			atual = cliente;
 		return pCliente.getCliente(cpf);
+	}
+	
+	public int checarCPFs(long cpf, ArrayList<Long> cpfs1, ArrayList<Long> cpfs2) {
+		for(long cfps : cpfs1) {
+			if (cpf == cfps)
+				return 0;
+		}
+		for(long cfps : cpfs2) {
+			if (cpf == cfps)
+				return 0;
+		}
+		return 1;
+	}
+	
+	public ArrayList<Long> listaCPFs() {
+		ArrayList<Long> cpfs = pCliente.getCPFs();
+		return cpfs;
+	}
+	
+	public void alterarNome(String nome) {
+		pCliente.alterarNome(atual, nome);
+	}
+	
+	public void alterarSenha(String senha) {
+		pCliente.alterarSenha(atual, senha);
 	}
 }
