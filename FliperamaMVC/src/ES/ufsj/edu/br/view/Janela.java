@@ -894,6 +894,43 @@ public class Janela implements ActionListener{
 	    	moldura.setVisible(false);
 			moldura.setVisible(true);
 
+		}else if(e.getSource() == botaoApagarJogo) {
+			moldura.remove(painelMA);
+	    	moldura.setTitle("Excluir Jogo");
+	    	moldura.add(painelApagaJogo);
+	    	moldura.validate();
+	    	moldura.setVisible(false);
+			moldura.setVisible(true);
+		}else if(e.getSource() == botaoVoltarApagaJogo) {
+			moldura.remove(painelApagaJogo);
+	    	moldura.setTitle("Fliperama Menu");
+	    	moldura.add(painelMA);
+	    	moldura.validate();
+	    	moldura.setVisible(false);
+			moldura.setVisible(true);
+		}else if(e.getSource() == botaoConfirmaApagaJogo) {
+			try {
+				String nomeJogo = textoApagaJogo.getText();
+				cJogos.apagarJogo(nomeJogo);
+				moldura.remove(painelApagaJogo);
+		    	moldura.setTitle("Fliperama Menu");
+		    	textoApagaJogo.setText("");
+		    	moldura.add(painelMA);
+		    	moldura.validate();
+		    	moldura.setVisible(false);
+				moldura.setVisible(true);
+				
+			} catch (NumberFormatException t) {
+				JOptionPane.showMessageDialog(null, "Jogo ja cadastrado", "Erro", JOptionPane.ERROR_MESSAGE);
+				textoNomeJogo.setText("");
+			}
+			
+			moldura.remove(painelApagaJogo);
+	    	moldura.setTitle("Fliperama Menu");
+	    	moldura.add(painelMA);
+	    	moldura.validate();
+	    	moldura.setVisible(false);
+			moldura.setVisible(true);
 		}
 	}
 }
