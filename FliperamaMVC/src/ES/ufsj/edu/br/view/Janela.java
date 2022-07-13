@@ -15,11 +15,13 @@ import javax.swing.JTextField;
 
 import ES.ufsj.edu.br.controller.CAtendente;
 import ES.ufsj.edu.br.controller.CCliente;
+import ES.ufsj.edu.br.controller.CJogos;
 import ES.ufsj.edu.br.model.*;
 
 public class Janela implements ActionListener{
 	private CCliente cCliente = new CCliente();
 	private CAtendente cAtendente = new CAtendente();
+	private CJogos cJogos = new CJogos();
 	
 	private JFrame moldura;
 	
@@ -62,6 +64,18 @@ public class Janela implements ActionListener{
 	private JButton botaoApagarJogo;
 	private JButton botaoLogoutMA;
 	
+	private JPanel painelCadastroJogo;	//painel Cadastro Jogo
+	private JTextField textoNomeJogo;
+	private JLabel labelNomeJogo;
+	private JButton botaoConfirmaCadastroJogo;
+	private JButton botaoVoltarCadastroJogo;
+	
+	private JPanel painelApagaJogo;	//painel Cadastro Jogo
+	private JTextField textoApagaJogo;
+	private JLabel labelApagaJogo;
+	private JButton botaoConfirmaApagaJogo;
+	private JButton botaoVoltarApagaJogo;
+	
 	private JPanel BuscaClienteA; //painel da busca do cliente no menu do atendente
 	private JTextField textoBuscaClienteA;
 	private JLabel labelCpfClienteA;
@@ -89,6 +103,7 @@ public class Janela implements ActionListener{
 	
 	public Janela () {
 		cAtendente.carregarAtendentes();
+		cJogos.carregarJogos();
 		
 		moldura = new JFrame();
 		moldura.setTitle("Fliperama Menu");	//mudar depois
@@ -99,6 +114,7 @@ public class Janela implements ActionListener{
 		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
 		    	cAtendente.salvarAtendentes();
 		    	cCliente.salvarClientes();
+		    	cJogos.salvarJogos();
 				moldura.setVisible(false);
 		    	System.exit(0);
 		        }
@@ -248,6 +264,41 @@ public class Janela implements ActionListener{
 		botaoLogoutMA.setBounds(185, 100, 80, 25);
 		botaoLogoutMA.addActionListener(this);
 		painelMA.add(botaoLogoutMA);
+		
+		painelCadastroJogo = new JPanel(); //painel cadastro jogo
+		painelCadastroJogo.setLayout(null);
+		textoNomeJogo = new JTextField();
+		labelNomeJogo = new JLabel("Nome do Jogo");
+		botaoConfirmaCadastroJogo = new JButton("Confirmar");
+		botaoVoltarCadastroJogo = new JButton("Voltar");
+		textoNomeJogo.setBounds(100, 50, 120, 25); //int x, int y, int width, int height
+		labelNomeJogo.setBounds(120, 30, 120, 25);
+		botaoConfirmaCadastroJogo.setBounds(40, 100, 100, 25);
+		botaoVoltarCadastroJogo.setBounds(160, 100, 100, 25);
+		botaoConfirmaCadastroJogo.addActionListener(this);
+		botaoVoltarCadastroJogo.addActionListener(this);
+		painelCadastroJogo.add(labelNomeJogo);
+		painelCadastroJogo.add(textoNomeJogo);
+		painelCadastroJogo.add(botaoConfirmaCadastroJogo);
+		painelCadastroJogo.add(botaoVoltarCadastroJogo);
+		
+		//painel apaga jogo
+		painelApagaJogo = new JPanel();
+		painelApagaJogo.setLayout(null);
+		textoApagaJogo = new JTextField();
+		textoApagaJogo.setBounds(100, 50, 120, 25);
+		labelApagaJogo = new JLabel("Nome do Jogo");
+		labelApagaJogo.setBounds(120, 30, 120, 25);
+		botaoConfirmaApagaJogo = new JButton("Confirmar");
+		botaoConfirmaApagaJogo.setBounds(40, 100, 100, 25);
+		botaoConfirmaApagaJogo.addActionListener(this);
+		botaoVoltarApagaJogo = new JButton("Voltar");
+		botaoVoltarApagaJogo.setBounds(160, 100, 100, 25);
+		botaoVoltarApagaJogo.addActionListener(this);
+		painelApagaJogo.add(labelApagaJogo);
+		painelApagaJogo.add(textoApagaJogo);
+		painelApagaJogo.add(botaoConfirmaApagaJogo);
+		painelApagaJogo.add(botaoVoltarApagaJogo);
 		
 		BuscaClienteA = new JPanel();	//painel busca cliente
 		BuscaClienteA.setLayout(null);
@@ -662,6 +713,43 @@ public class Janela implements ActionListener{
 			moldura.validate();
 			moldura.setVisible(false);
 			moldura.setVisible(true);
+		}
+		//painel Cadastrar Jogos
+		else if(e.getSource() == botaoCadastrarJogo) {
+			moldura.remove(painelMA);
+	    	moldura.setTitle("Cadastrar Jogos");
+	    	textoNomeJogo.setText("");
+	    	moldura.add(painelCadastroJogo);
+	    	moldura.validate();
+	    	moldura.setVisible(false);
+			moldura.setVisible(true);
+		}
+		//painel Cadastrar Jogos
+		else if(e.getSource() == botaoConfirmaCadastroJogo) {
+			try {
+				String nomeJogo = textoNomeJogo.getText();
+				Jogo j = new Jogo(nomeJogo, 0);
+				cJogos.cadastrarJogos(j);
+				
+				moldura.remove(painelCadastroJogo);
+		    	moldura.setTitle("Fliperama Menu");
+		    	moldura.add(painelMA);
+		    	moldura.validate();
+		    	moldura.setVisible(false);
+				moldura.setVisible(true);
+				
+			} catch (NumberFormatException t) {
+				JOptionPane.showMessageDialog(null, "Jogo ja cadastrado", "Erro", JOptionPane.ERROR_MESSAGE);
+				textoNomeJogo.setText("");
+			}
+		}else if(e.getSource() == botaoVoltarCadastroJogo) {		
+			moldura.remove(painelCadastroJogo);
+	    	moldura.setTitle("Fliperama Menu");
+	    	moldura.add(painelMA);
+	    	moldura.validate();
+	    	moldura.setVisible(false);
+			moldura.setVisible(true);
+
 		}
 	}
 }

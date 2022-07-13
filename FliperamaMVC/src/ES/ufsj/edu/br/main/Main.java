@@ -12,6 +12,7 @@ public class Main {
 	public static void main(String[] args) {
 		PCliente pCliente = new PCliente();
 		PAtendente pAtendente = new PAtendente();
+		PJogos pJogos = new PJogos();
 		
 		//pCliente.imprimirLista();
 		//pAtendente.imprimirListaAtendente();
